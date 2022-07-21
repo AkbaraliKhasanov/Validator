@@ -20,6 +20,13 @@ object MyValidator {
         return valid
     }
 
+    fun isValidZipCode(zipCode: String?): Boolean {
+        val regex = "^(\\d{6})\$"
+        val pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher = pattern.matcher(zipCode)
+        return matcher.matches()
+    }
+
     fun isIpAddressValid(ipAddress: String): Boolean {
         var valid = true
         val IP_ADDRESS: Pattern = Pattern.compile(
@@ -40,7 +47,7 @@ object MyValidator {
     }
 
     fun validateYear(year: Int): Boolean {
-        var isValid = year in 1901..2019
+        var isValid = year in 1901..2030
         if (!isValid) {
             isValid = false
         }
