@@ -6,3 +6,7 @@
 	}
 #### Open settings.gradle file and add the below line inside repositories
 	maven { url "https://jitpack.io" }
+#### Examples to use
+	 if (!MyValidator.isValidEmail(binding.inputEmail.text.toString())) {
+            binding.inputEmail.error = "Invalid email address"
+        } 
