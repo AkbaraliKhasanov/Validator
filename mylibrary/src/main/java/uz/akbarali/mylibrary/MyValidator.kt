@@ -1,5 +1,6 @@
 package uz.akbarali.mylibrary
 
+import android.graphics.Color
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.View
@@ -64,8 +65,9 @@ object MyValidator {
         val selectedView: View? = spinner.selectedView
         if (selectedView != null && selectedView is TextView) {
             val selectedTextView = selectedView as TextView
-            if (selectedTextView.text == "") {
+            if (selectedTextView.text == "Please select one") {
                 selectedTextView.error = error
+                selectedTextView.setTextColor(Color.parseColor("#FFFF0000"))
                 return false
             }
         }
