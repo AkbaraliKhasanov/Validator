@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import uz.akbarali.materiallibrary.MaterialLibrary
 import uz.akbarali.mylibrary.MyValidator
 import uz.akbarali.validator.databinding.ActivityMainBinding
 import java.lang.NumberFormatException
@@ -19,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val languages = resources.getStringArray(R.array.Languages)
         val spinner = findViewById<Spinner>(R.id.spread_inside)
         if (spinner != null) {
@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
 
             binding.submitBtn.setOnClickListener {
+                MaterialLibrary().materialDialog(this,"Akbarali","Ber","dsd","sdfs")
+
                 var isHave = true
                 if (!MyValidator.isPasswordMatching(
                         binding.password.text.toString(),
