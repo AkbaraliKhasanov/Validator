@@ -17,3 +17,4 @@ rootProject.name = "Validator"
 include ':app'
 include ':mylibrary'
 include ':Library'
+include ':materialLibrary'

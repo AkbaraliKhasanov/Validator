@@ -1,5 +1,6 @@
 package uz.akbarali.validator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import uz.akbarali.mylibrary.MyValidator
 import uz.akbarali.validator.databinding.ActivityMainBinding
+import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -26,39 +28,72 @@ class MainActivity : AppCompatActivity() {
                 android.R.layout.simple_spinner_item, languages
             )
             spinner.adapter = adapter
-            spinner.onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View, position: Int, id: Long
-                ) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.selected_item) + " " +
-                                "" + languages[position], Toast.LENGTH_SHORT
-                    ).show()
-                }
 
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
-                }
-            }
+
 
             binding.submitBtn.setOnClickListener {
+                var isHave = true
                 if (!MyValidator.isPasswordMatching(
                         binding.password.text.toString(),
                         binding.rePassword.text.toString()
                     )
                 ) {
                     binding.rePassword.error = "Password Not matching"
-                } else if (!MyValidator.isValidEmail(binding.email.text.toString())) {
-                    binding.email.error = "Invalid email address"
-                } else if (!MyValidator.validateSpinner(binding.spreadInside, "djfn")) {
-
+                    isHave = false
                 }
+                if (!MyValidator.isValidEmail(binding.email.text.toString())) {
+                    binding.email.error = "Invalid email address"
+                    isHave = false
+                }
+                if (!MyValidator.validateSpinner(binding.spreadInside, "djfn")) {
+                    isHave = false
+                }
+                if (!MyValidator.isIpAddressValid(binding.address.text.toString())) {
+                    binding.address.error = "Invalid IP Address"
+                    isHave = false
+                }
+                if (!MyValidator.isPhoneNumberValid(binding.numberPhone.text.toString())) {
+                    binding.numberPhone.error = "Invalid phone number"
+                    isHave = false
+                }
+                if (!MyValidator.isValidZipCode(binding.zipCode.text.toString())) {
+                    binding.zipCode.error = "Invalid zip code"
+                    isHave = false
+                }
+                try {
+                    if (!MyValidator.validateYear(Integer.parseInt(binding.year.text.toString()))) {
+                        binding.year.error = "Invalid year"
+                        isHave = false
+                    }
+                } catch (e: NumberFormatException) {
+                    binding.year.error = "Invalid year"
+                    isHave = false
+                }
+                if (isHave) {
+                    startActivity(Intent(this, MainActivity2::class.java))
+                    clearAll()
+                }
+
+            }
+            binding.clearBtn.setOnClickListener {
+                clearAll()
             }
 
 
         }
+    }
+
+    fun clearAll() {
+        binding.year.setText("")
+        binding.zipCode.setText("")
+        binding.address.setText("")
+        binding.email.setText("")
+        binding.password.setText("")
+        binding.rePassword.setText("")
+        binding.firstName.setText("")
+        binding.lastName.setText("")
+        binding.userId.setText("")
+        binding.numberPhone.setText("")
+        binding.spreadInside.id = 0
     }
 }
