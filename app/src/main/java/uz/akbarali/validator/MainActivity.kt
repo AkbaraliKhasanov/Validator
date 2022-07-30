@@ -32,8 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 
             binding.submitBtn.setOnClickListener {
-                MaterialLibrary().materialDialog(this,"Akbarali","Ber","dsd","sdfs")
-
+                MaterialLibrary().materialBottomSheet(this)
 
                 var isHave = true
                 if (!MyValidator.isPasswordMatching(
@@ -80,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             }
             binding.clearBtn.setOnClickListener {
                 clearAll()
-
+                MaterialLibrary().colorMaterialDialog(this)
             }
 
 

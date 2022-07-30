@@ -70,6 +70,7 @@ class MaterialLibrary() {
         var bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(context)
         val inflate = LayoutInflater.from(context).inflate(R.layout.bottomsheet, null)
         bottomSheetDialog.setContentView(inflate)
+
         bottomSheetDialog.show()
     }
 
@@ -80,9 +81,9 @@ class MaterialLibrary() {
             colorChooser(colors, initialSelection = BLUE) { dialog, color ->
                 // Use color integer
             }
-            positiveButton(R.string.select)
+            positiveButton(R.string.select) {
+                dismiss()
+            }
         }
     }
-
-
 }
