@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             binding.submitBtn.setOnClickListener {
                 MaterialLibrary().materialDialog(this,"Akbarali","Ber","dsd","sdfs")
 
+
                 var isHave = true
                 if (!MyValidator.isPasswordMatching(
                         binding.password.text.toString(),
@@ -79,10 +80,12 @@ class MainActivity : AppCompatActivity() {
             }
             binding.clearBtn.setOnClickListener {
                 clearAll()
+
             }
 
 
         }
+
     }
 
     fun clearAll() {
@@ -97,5 +100,6 @@ class MainActivity : AppCompatActivity() {
         binding.userId.setText("")
         binding.numberPhone.setText("")
         binding.spreadInside.id = 0
+
     }
 }
